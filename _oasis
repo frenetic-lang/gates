@@ -1,0 +1,31 @@
+OASISFormat: 0.4
+Name:        gates
+Version:     0.1.0
+Synopsis:    The Gates Hall SDN controller
+Authors:     Spiros Eliopoulos <seliopou@gmail.com>
+License:     BSD-3-clause
+Plugins:     META (0.4), DevFiles (0.4)
+
+Library gates
+  Path:       lib
+  BuildTools: ocamlbuild
+  BuildDepends:
+    async,
+    netkat,
+    netkat.async,
+    threads
+  Modules:
+    Gates_app
+  
+Executable gates
+  Path:       src
+  BuildTools: ocamlbuild
+  MainIs:     gates.ml
+  CompiledObject: best
+  BuildDepends:
+    async,
+    core,
+    gates,
+    netkat,
+    netkat.async,
+    threads

@@ -1,0 +1,44 @@
+# OASIS_START
+# DO NOT EDIT (digest: dc437a98b93c37eea3b22d3f99c4a368)
+# Ignore VCS directories, you can use the same kind of rule outside
+# OASIS_START/STOP if you want to exclude directories that contains
+# useless stuff for the build process
+<**/.svn>: -traverse
+<**/.svn>: not_hygienic
+".bzr": -traverse
+".bzr": not_hygienic
+".hg": -traverse
+".hg": not_hygienic
+".git": -traverse
+".git": not_hygienic
+"_darcs": -traverse
+"_darcs": not_hygienic
+# Library gates
+"lib/gates.cmxs": use_gates
+<lib/*.ml{,i}>: pkg_async
+<lib/*.ml{,i}>: pkg_core
+<lib/*.ml{,i}>: pkg_netkat
+<lib/*.ml{,i}>: pkg_netkat.async
+<lib/*.ml{,i}>: pkg_sexplib
+<lib/*.ml{,i}>: pkg_sexplib.syntax
+<lib/*.ml{,i}>: pkg_threads
+# Executable gates
+<src/gates.{native,byte}>: pkg_async
+<src/gates.{native,byte}>: pkg_cmdliner
+<src/gates.{native,byte}>: pkg_core
+<src/gates.{native,byte}>: pkg_netkat
+<src/gates.{native,byte}>: pkg_netkat.async
+<src/gates.{native,byte}>: pkg_sexplib
+<src/gates.{native,byte}>: pkg_sexplib.syntax
+<src/gates.{native,byte}>: pkg_threads
+<src/gates.{native,byte}>: use_gates
+<src/*.ml{,i}>: pkg_async
+<src/*.ml{,i}>: pkg_cmdliner
+<src/*.ml{,i}>: pkg_core
+<src/*.ml{,i}>: pkg_netkat
+<src/*.ml{,i}>: pkg_netkat.async
+<src/*.ml{,i}>: pkg_sexplib
+<src/*.ml{,i}>: pkg_sexplib.syntax
+<src/*.ml{,i}>: pkg_threads
+<src/*.ml{,i}>: use_gates
+# OASIS_STOP
