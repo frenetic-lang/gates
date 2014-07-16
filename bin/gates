@@ -1,0 +1,14 @@
+#!/bin/bash
+
+dir=`dirname $0`/..
+
+cd $dir
+
+if [ -x $dir/gates.byte ]; then
+    exec $dir/gates.byte $@
+elif [ -x $dir/gates.native ]; then
+    exec $dir/gates.native
+else
+    echo "gates executable not found" 1>&2
+    exit 1
+fi
