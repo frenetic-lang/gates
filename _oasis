@@ -13,7 +13,11 @@ Library gates
     async,
     netkat,
     netkat.async,
+    sexplib,
+    sexplib.syntax,
     threads
+  InternalModules:
+    Maclist
   Modules:
     Gates_app
   

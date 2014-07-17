@@ -1,8 +1,8 @@
 # OASIS_START
-# DO NOT EDIT (digest: 1853b9ee626c631375389fe5b74fb2e9)
+# DO NOT EDIT (digest: 60d6fc0e7ae38fefe8fa6f45dbb60dfa)
 version = "0.1.0"
 description = "The Gates Hall SDN controller"
-requires = "async core netkat netkat.async sexplib sexplib.syntax threads"
+requires = "async netkat netkat.async sexplib sexplib.syntax threads"
 archive(byte) = "gates.cma"
 archive(byte, plugin) = "gates.cma"
 archive(native) = "gates.cmxa"
