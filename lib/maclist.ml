@@ -18,25 +18,15 @@ end
 
 
 type t = {
-  table  : switch_port option Mac.Table.t;
+  table  : unit Mac.Table.t;
   update : policy Pipe.Writer.t
 }
 
 let to_policy table : policy =
-  let init = (False, False) in
-  let src, dst = Hashtbl.fold table ~init ~f:(fun ~key:mac ~data:loc (src,dst) ->
-    let src' = match loc with
-    | None ->
-      Test (EthSrc mac)
-    | Some(sw_id, pt_id) ->
-      let sw_t = Test (Switch sw_id) in
-      let pt_t = Test (Location (Physical pt_id)) in
-      Or (And (sw_t    , And (pt_t, Test (EthSrc mac))),
-          And (Neg sw_t, Test (EthSrc mac)))
-    in
-    Or (src', src), Or (Test (EthDst mac), dst))
+  let pred = Hashtbl.fold table ~init:False ~f:(fun ~key ~data acc ->
+    Or(Test(EthSrc key), acc))
   in
-  Filter (And (src, dst))
+  Filter pred
 
 let create () =
   let update_r, update_w = Pipe.create () in
@@ -50,12 +40,12 @@ let create () =
 module type S = sig
   type t
 
-  val register_mac : t -> ?loc:switch_port -> Packet.dlAddr -> unit Deferred.t
+  val register_mac : t -> Packet.dlAddr -> unit Deferred.t
   val unregister_mac : t -> Packet.dlAddr -> unit Deferred.t
 end
 
-let register_mac (t:t) ?loc (mac:Packet.dlAddr) =
-  Hashtbl.replace t.table mac loc;
+let register_mac (t:t) (mac:Packet.dlAddr) =
+  Hashtbl.replace t.table mac ();
   Pipe.write t.update (to_policy t.table)
 
 let unregister_mac (t:t) (mac:Packet.dlAddr) =
@@ -64,4 +54,3 @@ let unregister_mac (t:t) (mac:Packet.dlAddr) =
 
 let flush_operations (t:t) : Pipe.Flushed_result.t Deferred.t =
   Pipe.downstream_flushed t.update
-

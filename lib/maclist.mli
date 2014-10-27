@@ -15,13 +15,11 @@ val create : unit -> t * Policy.t
 module type S = sig
   type t
 
-  (** [register_mac t ?loc mac] registers [mac] as a valid MAC address on the
-   * network, allowing packets with [mac] as either its source or destination MAC
-   * address to traverse the network. If the user provides the optional [loc]
-   * argument then the application will ensure that only packets with [mac] as
-   * their source MAC address can originate from that location.
+  (** [register_mac t mac] registers [mac] as a valid MAC address on the
+   * network, allowing a packet with [mac] as its source MAC address to traverse
+   * the network.
    *)
-  val register_mac : t -> ?loc:switch_port -> Packet.dlAddr -> unit Deferred.t
+  val register_mac : t -> Packet.dlAddr -> unit Deferred.t
 
   (** [unregister_mac t mac] invalidates [mac] on the network. Any packet with
    * a source or destination MAC address traversing the network will be dropped.
