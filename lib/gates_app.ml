@@ -1,5 +1,8 @@
 open Async.Std
 
+open Async_NetKAT
+
+
 type t = {
   maclist : Maclist.t;
 }
@@ -14,5 +17,5 @@ let flush_operations (t:t) =
   Maclist.flush_operations t.maclist
 
 let create () =
-  let ctl, app = Maclist.create () in
-  { maclist = ctl }, app
+  let ctl, pred = Maclist.create () in
+  { maclist = ctl }, filter' pred

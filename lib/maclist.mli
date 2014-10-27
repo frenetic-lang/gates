@@ -10,7 +10,7 @@ type t
  * together with a control object that the user can use to configure the
  * application.
  *)
-val create : unit -> t * Policy.t
+val create : unit -> t * Pred.t
 
 module type S = sig
   type t
