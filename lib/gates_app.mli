@@ -1,12 +1,15 @@
 open Async.Std
 
+open Async_NetKAT
+
+
 type t
 
 (** [create ()] creates a [Gates_app] application, returning the application
  * together with a control object that the user can use to configure the
  * application.
  *)
-val create : unit -> t * Async_NetKAT.app
+val create : unit -> t * Policy.t
 
 include Maclist.S with type t := t
 

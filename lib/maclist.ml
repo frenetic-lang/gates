@@ -2,6 +2,7 @@ open Core.Std
 open Async.Std
 
 open NetKAT_Types
+open Async_NetKAT
 
 module Mac = struct
   module T = struct
@@ -44,7 +45,7 @@ let create () =
     Deferred.don't_wait_for (Pipe.transfer_id update_r send.Async_NetKAT.update);
     fun e -> return None
   in
-  ctl, Async_NetKAT.create_async (to_policy ctl.table) handler
+  ctl, Policy.create_async (to_policy ctl.table) handler
 
 module type S = sig
   type t
