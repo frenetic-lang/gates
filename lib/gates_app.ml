@@ -18,4 +18,5 @@ let flush_operations (t:t) =
 
 let create () =
   let ctl, pred = Maclist.create () in
-  { maclist = ctl }, filter' pred
+  let learn = Learning.create () in
+  { maclist = ctl }, seq (filter' pred) learn
