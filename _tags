@@ -1,5 +1,5 @@
 # OASIS_START
-# DO NOT EDIT (digest: d95862a19c13ef3d1993c1476e716d17)
+# DO NOT EDIT (digest: 4bf88ee313425c5fd2361123ab5106ec)
 # Ignore VCS directories, you can use the same kind of rule outside
 # OASIS_START/STOP if you want to exclude directories that contains
 # useless stuff for the build process
@@ -23,6 +23,8 @@
 <lib/*.ml{,i}>: pkg_threads
 # Executable gates
 <src/gates.{native,byte}>: pkg_async
+<src/gates.{native,byte}>: pkg_cohttp
+<src/gates.{native,byte}>: pkg_cohttp.async
 <src/gates.{native,byte}>: pkg_core
 <src/gates.{native,byte}>: pkg_netkat
 <src/gates.{native,byte}>: pkg_netkat.async
@@ -31,6 +33,8 @@
 <src/gates.{native,byte}>: pkg_threads
 <src/gates.{native,byte}>: use_gates
 <src/*.ml{,i}>: pkg_async
+<src/*.ml{,i}>: pkg_cohttp
+<src/*.ml{,i}>: pkg_cohttp.async
 <src/*.ml{,i}>: pkg_core
 <src/*.ml{,i}>: pkg_netkat
 <src/*.ml{,i}>: pkg_netkat.async

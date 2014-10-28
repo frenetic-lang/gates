@@ -29,6 +29,8 @@ Executable gates
   BuildDepends:
     async,
     core,
+    cohttp,
+    cohttp.async,
     gates,
     netkat,
     netkat.async,
